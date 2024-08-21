@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Window
+    x:Class="LevApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Levitation Stability Training Toolkit">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <!-- For System Info -->
+            <ColumnDefinition Width="*"/>
+            <!-- For Buttons -->
+        </Grid.ColumnDefinitions>
+
+        <!-- System Info Display -->
+        <StackPanel x:Name="SystemInfoPanel" Grid.Column="1" Margin="10">
+            <!-- System info will be dynamically added here -->
+        </StackPanel>
+
+        <!-- Buttons and other UI elements -->
+        <StackPanel Grid.Column="0" Margin="10">
+            <!-- Title -->
+            <TextBlock Text="Levitation Stability Training Toolkit" FontSize="20" FontWeight="Bold" Margin="0,0,0,10"/>
+
+            <!-- Live Time -->
+            <TextBlock x:Name="LiveTimeText" FontSize="16" Margin="0,0,0,10"/>
+
+            <!-- Status Indicator -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Image x:Name="StatusIcon" Width="20" Height="20" Margin="0,0,10,0"/>
+                <TextBlock x:Name="StatusText" FontSize="16"/>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <ScrollView Height="230" Width="400" ContentOrientation="None"
+                ZoomMode="Enabled" IsTabStop="True"
+                VerticalAlignment="Top" HorizontalAlignment="Left"
+                HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto"
+                VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto">
+
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="ConnectButton" Content="Connect" Width="300" Margin="0,0,0,10" Click="ConnectButton_Click"/>
+                    <Button x:Name="exit_plain" Content="Exit with no training" Width="300" Margin="0,0,0,10" Click="ExitPlain_Click"/>
+                    <Button x:Name="exit_trainbn" Content="Exit with BN Training" Width="300" Margin="0,0,0,10" Click="ExitTrainBN_Click"/>
+                    <Button x:Name="exit_trainboth" Content="Exit with BN and MLP Training" Width="300" Margin="0,0,0,10" Click="ExitTrainBoth_Click"/>
+                    <Button x:Name="pickingup" Content="Pick Up" Width="300" Margin="0,0,0,10" Click="PickingUp_Click"/>
+                    <Button x:Name="abort" Content="Abort" Width="300" Margin="0,0,0,10" Click="Abort_Click"/>
+                    <Button x:Name="goStart" Content="Start Test" Width="300" Margin="0,0,0,10" Click="GoStart_Click"/>
+                    <Button x:Name="simpleAnalysisFull" Content="Simple Probability Analysis" Width="300" Margin="0,0,0,10" Click="SimpleAnalysisFull_Click"/>
+                    <Button x:Name="simpleAnalysisUnknown" Content="Simple Probability Analysis (unknown path)" Width="400" Margin="0,0,0,10" Click="SimpleAnalysisUnknown_Click"/>
+                    <Button x:Name="bnFull" Content="Bayesian Network Full" Width="300" Margin="0,0,0,10" Click="BNFull_Click"/>
+                    <Button x:Name="bnSimple" Content="Bayesian Network Simple" Width="300" Margin="0,0,0,10" Click="BNSimple_Click"/>
+                    <Button x:Name="mlp" Content="Multi-Layer Perceptron (MLP) Inference" Width="300" Margin="0,0,0,10" Click="MLP_Click"/>
+                    <Button x:Name="bshl" Content="Manual Binary Search (to higher the lower bound)" Width="400" Margin="0,0,0,10" Click="BSHL_Click"/>
+                    <Button x:Name="bslu" Content="Manual Binary Search (to lower the upper bound)" Width="400" Margin="0,0,0,10" Click="BSLU_Click"/>
+                    <Button x:Name="maunal_input" Content="Manual Drop Result Input" Width="300" Margin="0,0,0,10" Click="ManualInput_Click"/>
+                    <Button x:Name="manual_data_collection" Content="Manual Data Collection" Width="300" Margin="0,0,0,10" Click="ManualDataCollection_Click"/>
+                    <Button x:Name="ampAdd" Content="Add Amplitude by 1000" Width="300" Margin="0,0,0,10" Click="AmpAdd_Click"/>
+                    <Button x:Name="ampReduce" Content="Reduce Amplitude by 1000" Width="300" Margin="0,0,0,10" Click="AmpReduce_Click"/>
+                    <Button x:Name="ampAddSmall" Content="Add Amplitude by 500" Width="300" Margin="0,0,0,10" Click="AmpAddSmall_Click"/>
+                    <Button x:Name="ampReduceSmall" Content="Reduce Amplitude by 500" Width="300" Margin="0,0,0,10" Click="AmpReduceSmall_Click"/>
+                    <Button x:Name="manual_speed_reduction" Content="Reduce Velocity by 0.05" Width="300" Margin="0,0,0,10" Click="ManualSpeedReduction_Click"/>
+                    <Button x:Name="manual_speed_increase" Content="Add Velocity by 0.05" Width="300" Margin="0,0,0,10" Click="ManualSpeedIncrease_Click"/>
+                    <Button x:Name="no_capture_mode" Content="Capture Mode (Use Cameras)" Width="300" Margin="0,0,0,10" Click="NoCaptureMode_Click"/>
+                </StackPanel>
+            </ScrollView>
+
+
+            <!-- Progress Indicator -->
+            <ProgressBar x:Name="ProgressIndicator" Height="20" Margin="0,0,0,10" Visibility="Collapsed"/>
+
+            <!-- InfoBar for Notifications -->
+            <InfoBar x:Name="NotificationInfoBar"
+                IsOpen="False"
+                Severity="Informational"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Width="400"/>
+
+            <!-- Author Information -->
+            <TextBlock Text="Application Developed by Weicheng, for his Master Project."/>
+            <TextBlock Text="August 2024"/>
+            <Button x:Name="RunPythonScriptButton" Content="View Desired Trajectory for Each Particle" Width="400" Margin="0,0,0,10" Click="RunPythonScriptButton_Click"/>
+
+            <TextBlock Text="Enter Dropped Particles (space-separated):" Margin="0,0,0,5"/>
+            <TextBox x:Name="ParticlesInputBox" Width="300" Margin="0,0,0,10"/>
+            <Button x:Name="SaveParticlesButton" Content="Save Dropped Particles" Width="150" Click="SaveParticlesButton_Click"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>

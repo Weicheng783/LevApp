@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "LevApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "LevApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
