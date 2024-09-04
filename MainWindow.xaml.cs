@@ -333,7 +333,7 @@ namespace LevApp
             string formattedVelocity = double.Parse(systemInfoValues["current_velocity"]).ToString("F6");
 
             // Define the path to the file where you want to save the content
-            string filePath = $"{systemInfoValues["integratedDir"]}/{(int.Parse(systemInfoValues["round"]) - 1)}_{formattedVelocity}_c_pre_process_drop.txt";
+            string filePath = $"{systemInfoValues["integratedDir"]}/{(int.Parse(systemInfoValues["totalRecordings"]) - 0)}_{formattedVelocity}_c_pre_process_drop.txt";
 
             // Initialize the content to write to the file
             //string contentToWrite = $"Dropped Particles: {droppedParticles}\n";
